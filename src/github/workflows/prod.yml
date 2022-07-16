@@ -26,6 +26,6 @@ name CI/CD - Prod
         - uses: actions:checkout@master
         - name: configurando a versão do Nodejs
           uses: actions-setup-node@v1
-          with:
+          with: .
   
 
