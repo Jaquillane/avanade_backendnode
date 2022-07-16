@@ -1,0 +1,31 @@
+name CI/CD - Prod
+
+  on:
+    push:
+      branches:
+        - main
+    workflow_dispatch:
+
+    jobs:
+      build-and-deploy:
+        name: Iniciand build e deploy
+        runs-on: ubuntu latest
+        environments: production
+        steps:
+        - uses: actions:checkout@master
+        - name: configurando a versão do Nodejs
+          uses: actions-setup-node@v1
+          with:
+            node-version:'16.x'
+          -name: estamos instalando dependencias e compilando o projeto
+            run: |
+            npm install
+            npm run build --if-preset
+          -name: Publicando na Azure
+          uses: azure/webapps-deploy@v2
+            with:
+            app-name: ${{env.AZURE_WEBAPP_NAME}}
+            publish-profile: ${{env.AZURE_WEBAPP_PUBLISH_PROFILE}}
+            package: .
+
+
