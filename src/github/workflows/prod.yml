@@ -10,7 +10,7 @@ name CI/CD - Prod
       build-and-deploy:
         name: Iniciand build e deploy
         runs-on: ubuntu latest
-        environments: production
+        environment: production
         steps:
         - uses: actions:checkout@master
         - name: configurando a versão do Nodejs
